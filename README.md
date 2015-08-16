@@ -39,7 +39,8 @@ Specify this along with the other required parameters in a hiera file or
 params.pp file.
 
 ## Usage
-
+Install and replace the existing firefox symbolic link:
+```
 class { 'debianfirefox':
   version => '40.0.2',
   tarball_destination => '/opt/firefox-$version.tar.bz2',
@@ -47,17 +48,22 @@ class { 'debianfirefox':
   link_location => '/usr/bin/firefox',
   replace_weasel_symlink => true,
 }
+```
 
+Install without replacing the existing firefox symbolic link:
+
+```
  class { 'debianfirefox':
    version => '40.0.2',
    tarball_destination => '/opt/firefox-$version.tar.bz2',
    install_location => '/opt/firefox',
    replace_weasel_symlink => false,
  }
+ ```
 
 ## Limitations
 
-This has been built to work with Debian and Debian only.
+This has been built to work with Debian only.
 
 ## Development
 
