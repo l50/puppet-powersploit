@@ -7,6 +7,11 @@
   "source": "https://github.com/l50/puppet-powersploit",
   "project_page": "https://github.com/l50/puppet-powersploit",
   "issues_url": "https://github.com/l50/puppet-powersploit",
+  "operatingsystem_support": [
+   {
+   "operatingsystem": "Ubuntu",
+   "operatingsystemrelease": []
+   }
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
     {"name":"puppetlabs-git","version_requirement":">= 1.0.0"}
