@@ -1,25 +1,11 @@
-# == Class: debianfirefox
+# == Class: powersploit
 #
-# This module is used to install firefox on a debian-based system.
-# It will also replace the existing symlink for iceweasel if specified.
+# This module installs Powersploit, a very powerful post-exploitation tool
+# against Windows targets.
 #
 # === Parameters
 #
-# [version]
-#   The version of firefox to install
-#
-# [tarball_destination]
-#   The location to store the tarball once it's downloaded
-#
-# [install_location]
-#   Where you want to install firefox to
-#
-# [link_location]
-#   Name of symbolic link to associate with firefox
-#
-# [replace_weasel_symlink]
-#   Specify the decision to replace the existing iceweasel symlink
-#   associated with firefox on the system
+# N/A
 #
 # === Variables
 #
@@ -27,20 +13,7 @@
 #
 # === Examples
 #
-# class { 'debianfirefox':
-#  version => '40.0.2',
-#  tarball_destination => '/opt/firefox-$version.tar.bz2',
-#  install_location => '/opt/firefox',
-#  link_location => '/usr/bin/firefox',
-#  replace_weasel_symlink => true,
-# }
-#
-# class { 'debianfirefox':
-#   version => '40.0.2',
-#   tarball_destination => '/opt/firefox-$version.tar.bz2',
-#   install_location => '/opt/firefox',
-#   replace_weasel_symlink => false,
-# }
+#  class { 'powersploit' }
 #
 # === Authors
 #
@@ -49,49 +22,53 @@
 # === Copyright
 #
 # Copyright 2015 l50
-#
-class debianfirefox(
-  $version='40.0.2',
-  $tarball_destination="/opt/firefox-$version.tar.bz2",
-  $install_location='/opt/firefox',
-  $link_location='/usr/bin/firefox',
-  $replace_weasel_symlink=true,
-) {
-  $download_link="http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/$version/linux-x86_64/en-US/firefox-$version.tar.bz2"
+class powersploit {
 
-  exec { 'download_firefox':
-    command => "/usr/bin/wget -q $download_link -O $tarball_destination",
-    creates => "$tarball_destination",
+# Clone Powersploit from git repo
+  vcsrepo { '/opt/Powersploit':
+    ensure   => present,
+    provider => git,
+    source   => 'git://github.com/mattifestation/PowerSploit.git',
+    require  => Class['git'],
+    before   => [
+      Exec['download_listener'],
+      Exec['download_ps_encoder'],
+    ],
+  }
+
+# Get listener start script required by Powersploit to function
+  exec { 'download_listener':
+    command => "/usr/bin/wget -q https://raw.github.com/obscuresec/random/master/StartListener.py -O /opt/Powersploit/StartListener.py",
+    creates => "/opt/Powersploit/StartListener.py",
     path    => ['/usr/bin', '/bin', '/sbin'],
   }
 
-  exec { 'unzip_firefox':
-    command => "/bin/tar -xvf $tarball_destination -C /opt",
-    creates => "$install_location",
-    path    => ['/usr/bin', '/bin', '/sbin'],
+# Set permissions on the Listener
+  file { '/opt/Powersploit/StartListener.py':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => 0755,
     require => [
-      Exec['download_firefox'],
-    ]
+      Vcsrepo['/opt/Powersploit'],
+      Exec['download_listener'],
+    ],
   }
 
-# Remove existing iceweasel symlink
-  if $replace_weasel_symlink {
-    exec { 'delete_iceweasel_link':
-      command => "/bin/rm -r $link_location",
-      path    => ['/usr/bin', '/bin', '/sbin'],
-    }
+  exec { 'download_ps_encoder':
+    command => "/usr/bin/wget -q https://raw.github.com/darkoperator/powershell_scripts/master/ps_encoder.py -O /opt/Powersploit/ps_encoder.py",
+    creates => "/opt/Powersploit/ps_encoder.py",
+    path    => ['/usr/bin', '/bin', '/sbin'],
   }
 
-  if $replace_weasel_symlink {
-    exec { 'link_firefox':
-      command => "/bin/ln -s $install_location/firefox $link_location",
-      creates => "$link_location",
-      path    => ['/usr/bin', '/bin', '/sbin'],
-      require => [
-        Exec['download_firefox'],
-        Exec['unzip_firefox'],
-        Exec['delete_iceweasel_link']
-      ]
-    }
+  file { '/opt/Powersploit/ps_encoder.py':
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    mode    => 0755,
+    require => [
+      Vcsrepo['/opt/Powersploit'],
+      Exec['download_ps_encoder'],
+    ],
   }
 }

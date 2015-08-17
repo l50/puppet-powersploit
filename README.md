@@ -1,4 +1,4 @@
-debianfirefox
+powersploit
 ===================
 
 
@@ -8,9 +8,10 @@ debianfirefox
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with debianfirefox](#setup)
-    * [What debianfirefox affects](#what-debianfirefox-affects)
-    * [Beginning with debianfirefox](#beginning-with-debianfirefox)
+3. [Setup - The basics of getting started with powersploit](#setup)
+    * [What powersploit affects](#what-powersploit-affects)
+    * [Setup requirements](#setup-requirements)
+    * [Beginning with powersploit](#beginning-with-powersploit)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -18,53 +19,43 @@ debianfirefox
 
 ## Overview
 
-Used to add Firefox to a Debian system.
+Used to install Powersploit
 
 ## Module Description
 
-This module will install Firefox on a Debian machine and can replace the existing
-"firefox" symbolic link that is associated with Iceweasel.
+This module will install the Powersploit post exploitation tool
 
 ## Setup
 
-### What debianfirefox affects
+### What powersploit affects
 
-* Iceweasel
-* Firefox
+* A list of files, packages, services, or operations that the module will alter,
+  impact, or execute on the system it's installed on.
+* This is a great place to stick any warnings.
+* Can be in list or paragraph form.
 
-### Beginning with debianfirefox
+### Setup Requirements **OPTIONAL**
 
-Look up the specific version of firefox you want to install.
-Specify this along with the other required parameters in a hiera file or
-params.pp file.
+Both the git and stdlib puppet modules are required for this module to work
+properly. Please add these to your Puppetfile like so:
+
+```
+mod 'puppetlabs/stdlib'
+mod 'puppetlabs/git'
+```
+
+### Beginning with powersploit
+
+This module should just work right out of the box. There are no parameters or variables.
 
 ## Usage
-Install and replace the existing firefox symbolic link:
 
 ```
-class { 'debianfirefox':
-  version => '40.0.2',
-  tarball_destination => '/opt/firefox-$version.tar.bz2',
-  install_location => '/opt/firefox',
-  link_location => '/usr/bin/firefox',
-  replace_weasel_symlink => true,
-}
+class { 'powersploit': }
 ```
-
-Install without replacing the existing firefox symbolic link:
-
-```
- class { 'debianfirefox':
-   version => '40.0.2',
-   tarball_destination => '/opt/firefox-$version.tar.bz2',
-   install_location => '/opt/firefox',
-   replace_weasel_symlink => false,
- }
- ```
-
 ## Limitations
 
-This has been built to work with Debian only.
+This has been tested on Kali Linux, which is Debian based.
 
 ## Development
 
@@ -73,4 +64,4 @@ work that has already been done.
 
 ## Release Notes/Contributors/Etc
 
-Jayson Grace (l50) <jayson.e.grace@gmail.com>
+Jayson Grace (l50) <jayson.e.grace@gmail.com

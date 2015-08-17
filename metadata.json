@@ -1,18 +1,12 @@
 {
-  "name": "l50-debianfirefox",
+  "name": "l50-powersploit",
   "version": "0.1.0",
   "author": "l50",
-  "summary": "Install Firefox on Debian and replace Iceweasel symlink",
+  "summary": "Install Powersploit post-exploitation tool",
   "license": "MIT",
-  "source": "",
-  "project_page": null,
-  "issues_url": null,
-  "operatingsystem_support": [
-   {
-   "operatingsystem": "Ubuntu",
-   "operatingsystemrelease": []
-   }
-  ],
+  "source": "https://github.com/l50/puppet-powersploit",
+  "project_page": "https://github.com/l50/puppet-powersploit",
+  "issues_url": "https://github.com/l50/puppet-powersploit",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
     {"name":"puppetlabs-git","version_requirement":">= 1.0.0"}
