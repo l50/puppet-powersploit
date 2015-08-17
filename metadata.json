@@ -15,5 +15,6 @@
   ],
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-git","version_requirement":">= 1.0.0"}
   ]
 }

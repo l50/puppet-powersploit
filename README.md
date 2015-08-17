@@ -40,6 +40,7 @@ params.pp file.
 
 ## Usage
 
+```
 class { 'debianfirefox':
   version => '40.0.2',
   tarball_destination => '/opt/firefox-$version.tar.bz2',
@@ -54,6 +55,7 @@ class { 'debianfirefox':
    install_location => '/opt/firefox',
    replace_weasel_symlink => false,
  }
+ ```
 
 ## Limitations
 
