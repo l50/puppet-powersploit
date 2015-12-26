@@ -9,7 +9,6 @@ powersploit
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Setup - The basics of getting started with powersploit](#setup)
-    * [What powersploit affects](#what-powersploit-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with powersploit](#beginning-with-powersploit)
 4. [Usage - Configuration options and additional functionality](#usage)
@@ -27,14 +26,7 @@ This module will install the Powersploit post exploitation tool
 
 ## Setup
 
-### What powersploit affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 Both the git and stdlib puppet modules are required for this module to work
 properly. Please add these to your Puppetfile like so:
@@ -46,13 +38,16 @@ mod 'puppetlabs/git'
 
 ### Beginning with powersploit
 
-This module should just work right out of the box. There are no parameters or variables.
+Simply specify the directory you wish PowerSploit to be installed to as a parameter and run the module as you would any other.
 
 ## Usage
+Install the PowerSploit tool to /opt/PowerSploit:
+```
+class { 'powersploit':
+  install_location => '/opt/PowerSploit',
+  }
+```
 
-```
-class { 'powersploit': }
-```
 ## Limitations
 
 This has been tested on Kali Linux, which is Debian based.
@@ -64,4 +59,4 @@ work that has already been done.
 
 ## Release Notes/Contributors/Etc
 
-Jayson Grace (l50) <jayson.e.grace@gmail.com
+Jayson Grace (l50) <jayson.e.grace@gmail.com>
