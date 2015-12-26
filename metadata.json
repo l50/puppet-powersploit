@@ -1,20 +1,28 @@
 {
-  "name": "l50-powersploit",
-  "version": "0.1.0",
-  "author": "l50",
-  "summary": "Install Powersploit post-exploitation tool",
-  "license": "MIT",
-  "source": "https://github.com/l50/puppet-powersploit",
-  "project_page": "https://github.com/l50/puppet-powersploit",
-  "issues_url": "https://github.com/l50/puppet-powersploit",
-  "operatingsystem_support": [
-   {
-   "operatingsystem": "Kali",
-   "operatingsystemrelease": []
-   }
-  ],
-  "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-    {"name":"puppetlabs/git"}
-  ]
+    "name": "l50-powersploit",
+    "version": "0.1.0",
+    "author": "l50",
+    "summary": "Install the Powersploit post-exploitation tool",
+    "license": "MIT",
+    "source": "https://github.com/l50/puppet-powersploit",
+    "project_page": "https://github.com/l50/puppet-powersploit",
+    "issues_url": "https://github.com/l50/puppet-powersploit",
+    "operatingsystem_support": [
+        {
+            "operatingsystem": "Kali",
+            "operatingsystemrelease": [
+                "2.0"
+            ]
+        },
+        {
+            "operatingsystem": "Ubuntu",
+            "operatingsystemrelease": [
+                "14.04"
+            ]
+        }
+    ],
+    "dependencies": [
+        {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+        {"name":"puppetlabs/git"}
+    ]
 }
